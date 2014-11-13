@@ -7,6 +7,8 @@
 
 package parallellistaccess;
 
+import java.util.NoSuchElementException;
+
 /**
  *
  * @author T500
@@ -32,6 +34,7 @@ public abstract class Process extends Thread {
     }
 
     public void p(Semaphore sem) throws InterruptedException {
+
         if (--sem.counter < 0) {
             sem.queue.add(this);
             wait = true;
@@ -40,13 +43,14 @@ public abstract class Process extends Thread {
                 System.out.println(offset + "wait");
                 Thread.sleep(1000);
             }
-            System.out.println();
         }
     }
 
     public void v(Semaphore sem) {
         if (++sem.counter <= 0) {
-            ((Process) sem.queue.remove()).allow();
+            try {
+                ((Process) sem.queue.remove()).allow();
+            } catch (NoSuchElementException e) {}
         }
     }
 }

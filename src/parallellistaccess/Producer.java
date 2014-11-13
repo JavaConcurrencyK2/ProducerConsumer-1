@@ -24,6 +24,8 @@ public class Producer<T> extends Process {
         p(bundle.write);
         p(bundle.mutex);
         bundle.list.add(key + ": " + data.toString());
+        System.out.print(offset + "insert");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(key) + bundle.list);
         v(bundle.mutex);
         v(bundle.read);
     }
@@ -32,7 +34,6 @@ public class Producer<T> extends Process {
         while (true) {
             try {
                 insertData(data);
-                System.out.println(offset + "insert");
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {}
         }
