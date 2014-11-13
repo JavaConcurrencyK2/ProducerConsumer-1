@@ -34,15 +34,23 @@ public class ParallelListAccess {
 
         final ParallelListAccess pla = new ParallelListAccess(maxData);
 
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {}
+            }}).start();
+
         for (int i = 0; i < producers; i++) {
 
-            new Producer<>(i, "hello", pla.bundle).start();
-//            new Consumer<>(i, pla.bundle).start();
+            new Producer<>(i, "data", pla.bundle).start();
             Thread.sleep(1000);
-
         }
-        System.out.println("LIST"+ pla.bundle.list);
 
+        for (int i = 0; i < consumers; i++) {
+            new Consumer<>(i + producers, pla.bundle).start();
+            Thread.sleep(1000);
+        }
     }
 
     public ParallelListAccess(int maxData) {
