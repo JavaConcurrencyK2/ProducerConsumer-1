@@ -31,8 +31,8 @@ public class Producer<T> extends Process {
     public void run() {
         while (true) {
             try {
-                System.out.println(offset + "insert");
                 insertData(data);
+                System.out.println(offset + "insert");
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {}
         }
