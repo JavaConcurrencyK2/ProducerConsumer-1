@@ -25,7 +25,7 @@ public class Producer<T> extends Process {
         p(bundle.mutex);
         bundle.list.add(key + ": " + data.toString());
         System.out.print(offset + "insert");
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(key) + bundle.list);
+//        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(key) + bundle.list);
         v(bundle.mutex);
         v(bundle.read);
     }

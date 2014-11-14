@@ -28,29 +28,19 @@ public class ParallelListAccess {
      */
     public static void main(final String[] args) throws InterruptedException {
 
-        int maxData = 5;
-        int producers = 5;
-        int consumers = 5;
+        int maxData = 10;
+        int producers = 15;
+        int consumers = 14;
 
         final ParallelListAccess pla = new ParallelListAccess(maxData);
-
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {}
-            }}).start();
 
         for (int i = 0; i < producers; i++) {
 
             new Producer<>(i, "data", pla.bundle).start();
-            Thread.sleep(1000);
-        }
-
-        for (int i = 0; i < consumers; i++) {
             new Consumer<>(i + producers, pla.bundle).start();
             Thread.sleep(1000);
         }
+
     }
 
     public ParallelListAccess(int maxData) {

@@ -22,7 +22,7 @@ public class Consumer<T> extends Process {
         p(bundle.mutex);
         T data = (T) bundle.list.remove(0);
         System.out.print(offset + "remove");
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(key) + bundle.list);
+//        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(key) + bundle.list);
         v(bundle.mutex);
         v(bundle.write);
 
